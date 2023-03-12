@@ -1,0 +1,206 @@
+.App {
+  text-align: center;
+  color: #fff;
+}
+.App *{
+  /* color: rgb(11, 239, 255); */
+  font-family: cursive;
+  box-sizing: border-box;
+}
+
+/* general button */
+.button{
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  margin: 10px 25px;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+.button:disabled{
+  cursor: not-allowed;
+}
+
+
+/* Blue Button */
+
+.blueButton{
+  border-color: rgb(11, 239, 255);
+  color:rgb(11, 239, 255);
+}
+.blueButton:hover{
+  background-color: rgba(10, 236, 252, 0.322);
+}
+.blueButton:active{
+  background-color: rgb(10, 236, 252);
+  color: azure;
+}
+
+
+/* red Button */
+.redButton{
+  border-color: rgb(255, 0, 0);
+  color: rgb(255, 0, 0);
+}
+.redButton:hover{
+  background-color: rgba(255, 0, 0, 0.205);
+}
+.redButton:active{
+  background-color: rgb(255, 0, 0);
+  color: azure;
+}
+
+/* green Button */
+.greenButton{
+  border-color: rgb(7, 255, 7);
+  color: rgb(0, 250, 0);
+}
+.greenButton:hover{
+  background-color: rgba(7, 255, 7, 0.205);
+}
+.greenButton:active{
+  background-color: rgb(7, 255, 7);
+  color: azure;
+}
+
+.button:disabled{
+  background-color: rgb(172, 171, 171);
+  color: rgb(78, 78, 78);
+  border-color: rgb(78, 78, 78);
+}
+
+.w40{
+  width: 40%;
+}
+.w50{
+  width: 50%;
+}
+.w60{
+  width: 60%;
+}
+.w70{
+  width: 70%;
+}
+.w80{
+  width: 80%;
+}
+.w90{
+  width: 90%;
+}
+.w100{
+  width: 100%;
+}
+
+.mdBrdRd{
+  border-radius: 15px;
+}
+.smBrdRd{
+  border-radius: 10px;
+}
+.vsmBrdRd{
+  border-radius: 5px;
+}
+.lgBrdRd{
+  border-radius: 20px;
+}
+.vlgmBrdRd{
+  border-radius: 25px;
+}
+
+.bdcRed{
+  border-color:rgb(255, 0, 0);
+}
+
+.bdcBlue{
+  border-color:rgb(11, 239, 255);
+}
+
+.bdcGreen{
+  border-color:  rgb(7, 255, 7);
+}
+
+.bdSolid{
+  border: 1px solid;
+}
+.bdGrv{
+  border: 1px groove;
+}
+
+.mxauto{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.myVlg{
+  margin-top: 55px;
+  margin-bottom: 35px;
+}
+
+.myLg{
+  margin-top: 45px;
+  margin-bottom: 30px;
+}
+
+.myMd{
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
+.mySm{
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.myVsm{
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+.bxSz{
+  box-sizing: border-box;
+}
+
+.grid4x{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 15px;
+}
+.grid3x{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+}
+.grid2x{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flexWrap{
+  flex-wrap: wrap;
+}
+
+.pdMd{
+  padding: 15px;
+}
+
+.pdLg{
+  padding: 20px;
+}
+
+.pdVlg{
+  padding: 25px;
+}
+
+.pdSm{
+  padding: 10px;
+}
+
+.flexColumn{
+  flex-direction: column;
+}
