@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { BsRocketFill } from 'react-icons/bs'
 import { AiFillHeart, AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
-import { GiAlienSkull, GiFireSilhouette } from 'react-icons/gi'
+import { GiAlienSkull, GiFireSilhouette, GiHelp } from 'react-icons/gi'
 import { HiSpeakerXMark, HiSpeakerWave } from 'react-icons/hi2'
 import { CiPause1, CiPlay1 } from 'react-icons/ci'
 import { VscDebugRestart } from 'react-icons/vsc'
@@ -14,7 +14,7 @@ for (let i = 0; i < 30; i++) {
 
     let arr = [];
 
-    for (let j = 0; j < 30; j++) {
+    for (let j = 0; j < 10; j++) {
         arr.push(null);
     }
 
@@ -29,7 +29,7 @@ function appendBugs(grid, setScore, setLife, EndGame) {
     grid = [...grid]
     const gridI = [];
 
-    for (let i = 0; i <= 29; i++) {
+    for (let i = 0; i <= 9; i++) {
         if (grid[29][i] === "B") {
             setLife(prev => {
                 if (prev.length === 1) {
@@ -46,13 +46,13 @@ function appendBugs(grid, setScore, setLife, EndGame) {
 
     for (let i = 0; i < 29; i++) {
 
-        let arr = new Array(30).fill(null);
+        let arr = new Array(10).fill(null);
 
         gridI.push(arr);
     }
 
     for (let i = 0; i < 29; i++) {
-        for (let j = 0; j < 30; j++) {
+        for (let j = 0; j < 10; j++) {
             if (grid[i + 1][j] === "M" && grid[i][j] === "B") {
                 gridI[i][j] = null;
                 grid[i + 1][j] = null;
@@ -66,9 +66,9 @@ function appendBugs(grid, setScore, setLife, EndGame) {
     }
 
 
-    let bugPos = randomNumber(0, 29);
+    let bugPos = randomNumber(0, 9);
 
-    let newRow = new Array(30).fill(null);
+    let newRow = new Array(10).fill(null);
     newRow[bugPos] = "B";
 
     gridI.unshift(newRow);
@@ -81,7 +81,7 @@ function appendEmptyRow(grid, setScore, setLife, EndGame) {
     const gridI = [];
 
 
-    for (let i = 0; i <= 29; i++) {
+    for (let i = 0; i <= 9; i++) {
         if (grid[29][i] === "B") {
             setLife(prev => {
                 if (prev.length === 1) {
@@ -96,13 +96,13 @@ function appendEmptyRow(grid, setScore, setLife, EndGame) {
 
     for (let i = 0; i < 29; i++) {
 
-        let arr = new Array(30).fill(null);
+        let arr = new Array(10).fill(null);
 
         gridI.push(arr);
     }
 
     for (let i = 0; i < 29; i++) {
-        for (let j = 0; j < 30; j++) {
+        for (let j = 0; j < 10; j++) {
             if (grid[i + 1][j] === "M" && grid[i][j] === "B") {
                 gridI[i][j] = null;
                 grid[i + 1][j] = null;
@@ -117,7 +117,7 @@ function appendEmptyRow(grid, setScore, setLife, EndGame) {
 
 
 
-    let newRow = new Array(30).fill(null);
+    let newRow = new Array(10).fill(null);
 
 
     gridI.unshift(newRow);
@@ -162,6 +162,7 @@ export default () => {
     const [score, setScore] = useState(0);
     const [lives, setLives] = useState([1, 1, 1]);
     const [audio, setAudio] = useState(false);
+    const [showIns, setShowIns] = useState(false)
     const fireRef = useRef(null);
     const gridRef = useRef(null);
     const griD = useRef(null);
@@ -177,7 +178,7 @@ export default () => {
     const handleRight = () => {
         // setDir("90deg")
         setCoOrd(([i, j]) => {
-            if (j < 29) {
+            if (j < 9) {
                 j++;
             }
             return [i, j]
@@ -254,8 +255,8 @@ export default () => {
         }
     }
     const EndGame = () => {
-        clearInterval(gridRef.current);
         alert("You Lost")
+        handleReset();
     }
 
     useEffect(() => {
@@ -273,7 +274,7 @@ export default () => {
             setGrid(prev => appendBugs(prev));
             gridRef.current = setInterval(() => {
 
-                if (a === 2) {
+                if (a === 1) {
                     setGrid(prev => appendBugs(prev, setScore, setLives, EndGame));
                     a = 0;
                 } else {
@@ -292,6 +293,10 @@ export default () => {
 
     return <div className={style.runner}>
         <div>
+            {pause?<div className={style.notice}>
+                <h2>Game Paused</h2>
+                <button className='button blueButton'  onClick={()=>{setPause(prev=>!prev)}}>{pause?<CiPlay1/>:<CiPause1/>}</button>                
+            </div>:""}
             <div className={style.scorePanel}>
                 <h2>Score: {score}</h2>
                 <div>{lives.map((e, i) => <AiFillHeart className={style.lifeHeart} key={`lifeHeart${i}`}/>)}</div>
@@ -332,14 +337,14 @@ export default () => {
         </div>
         <div className={style.buttonBox}>
 
-
-                <ul>
-                    Instructions
+                <button className={`button greenButton ${style.help}`} greenButton onClick={()=>(setShowIns(prev=>!prev))}><GiHelp/></button>
+                {showIns?<ul>
+                    
                     <li>(Shift): start/pause game</li>
                     <li>(leftArrowKey): move left</li>
                     <li>(rightArrowKey): move right</li>
                     <li>(space): fire</li>
-                </ul>
+                </ul>:""}
                 <div className={style.priControl}>
 
                     <button className='button blueButton' >{audio?<HiSpeakerWave/>:<HiSpeakerXMark/>}</button>
@@ -351,9 +356,9 @@ export default () => {
 
                 <div className={style.moves}>
 
-                    <button className='button blueButton'  onClick={()=>{handleLeft()}}><AiFillCaretLeft/></button>
-                    <button className='button redButton'  onClick={()=>{handleFire()}}><GiFireSilhouette className={style.fire2}/></button>
-                    <button className='button blueButton'  onClick={()=>{handleRight()}}><AiFillCaretRight/></button>
+                    <button className='button blueButton' disabled={pause}  onClick={()=>{handleLeft()}}><AiFillCaretLeft/></button>
+                    <button className='button redButton' disabled={pause}  onClick={()=>{handleFire()}}><GiFireSilhouette className={style.fire2}/></button>
+                    <button className='button blueButton' disabled={pause}  onClick={()=>{handleRight()}}><AiFillCaretRight/></button>
 
                 </div>
 
